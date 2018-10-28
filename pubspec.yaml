@@ -1,7 +1,7 @@
 name: date_interval_navigator
 description: Display a calendar view for flutter.
-version: 0.1.0
-author: Vinicisu Andrade
+version: 0.0.1
+author: Vinicius Andrade
 homepage: https://github.com/vbandrade/date_interval_navigator
 
 environment:
@@ -10,12 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
 
   intl: 0.15.7
 
 dev_dependencies:
-  test: any
   flutter_test:
     sdk: flutter
