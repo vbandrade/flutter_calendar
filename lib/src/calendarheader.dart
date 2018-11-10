@@ -130,7 +130,7 @@ class CalendarHeaderState extends State<CalendarHeader>
     if (myExpandedState) {
       _controller.forward();
     } else {
-      _controller.reverse().then<void>((Null value) {
+      _controller.reverse().then<void>((void value) {
         setState(() {
           // Rebuild without widget.children.
         });
