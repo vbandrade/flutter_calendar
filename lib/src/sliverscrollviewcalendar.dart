@@ -448,16 +448,9 @@ class SliverScrollViewCalendarElement extends StatelessElement
 }
 
 class SliverScrollViewCalendar extends ScrollView {
-  final DateTime initialDate;
-  final CalendarViewType view;
-
-  final ImageProvider monthHeader;
-  final CalendarWidgetState state;
-
   SliverScrollViewCalendar({
     @required this.initialDate,
     @required double initialScrollOffset,
-    @required this.monthHeader,
     @required this.state,
     this.view = CalendarViewType.Schedule,
   }) : super(
@@ -467,6 +460,10 @@ class SliverScrollViewCalendar extends ScrollView {
                 initialScrollOffset: initialScrollOffset)) {
     state.controller = controller;
   }
+
+  final DateTime initialDate;
+  final CalendarViewType view;
+  final CalendarWidgetState state;
 
   @override
   SliverScrollViewCalendarElement createElement() =>
@@ -486,14 +483,13 @@ class WrappedScrollViewCalendar extends StatefulWidget {
   final CalendarViewType view;
 
   final double initialScrollOffset;
-  final ImageProvider monthHeader;
+
   final CalendarWidgetState state;
 
   WrappedScrollViewCalendar({
     @required this.initialDate,
     @required this.initialScrollOffset,
     @required this.state,
-    @required this.monthHeader,
     this.view = CalendarViewType.Schedule,
   });
 
@@ -534,7 +530,6 @@ class WrapperScrollViewCalendarState extends State<WrappedScrollViewCalendar> {
         initialDate: widget.initialDate,
         state: widget.state,
         view: widget.view,
-        monthHeader: widget.monthHeader,
         initialScrollOffset: widget.initialScrollOffset,
       ),
     );

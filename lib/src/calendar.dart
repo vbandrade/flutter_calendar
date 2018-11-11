@@ -48,7 +48,6 @@ class CalendarWidget extends StatefulWidget {
   CalendarWidget({
     @required this.initialDate,
     @required this.bannerHeader,
-    @required this.monthHeader,
     @required this.buildItem,
     @required this.getEvents,
     @required this.monthHeaderBuilder,
@@ -68,7 +67,6 @@ class CalendarWidget extends StatefulWidget {
   final double initialScrollOffset;
   final CalendarEventBuiler getEvents;
   final CalendarWidgetBuilder buildItem;
-  final ImageProvider monthHeader;
   final ImageProvider bannerHeader;
   final Color headerColor;
   final TextStyle headerMonthStyle;
@@ -225,7 +223,6 @@ class CalendarWidgetState extends State<CalendarWidget> {
             initialDate: widget.initialDate,
             initialScrollOffset: widget.initialScrollOffset,
             view: widget.view,
-            monthHeader: widget.monthHeader,
           ),
         ),
       ],

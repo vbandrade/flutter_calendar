@@ -77,7 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
         getEvents: getEvents,
         monthHeaderBuilder: monthHeaderBuilder,
         bannerHeader: AssetImage("assets/images/calendarheader.png"),
-        monthHeader: AssetImage("assets/images/calendarbanner.jpg"),
       ),
     );
   }
