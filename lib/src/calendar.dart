@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
-import 'calendarheader.dart';
-import 'calendarevent.dart';
-export 'calendarevent.dart';
-import 'sliverscrollviewcalendar.dart';
-import 'sliverlistcalendar.dart';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'calendarevent.dart';
+import 'calendarheader.dart';
+import 'sliverlistcalendar.dart';
+import 'sliverscrollviewcalendar.dart';
+
+export 'calendarevent.dart';
 
 typedef List<CalendarEvent> CalendarEventBuiler(DateTime start, DateTime end);
 
@@ -17,22 +18,15 @@ typedef List<CalendarEvent> CalendarEventBuiler(DateTime start, DateTime end);
 typedef Widget CalendarWidgetBuilder(BuildContext context, CalendarEvent index);
 
 ///
+/// The Wdiget for the month header
+///
+typedef Widget MonthHeaderBuilder(BuildContext context, int year, int month);
+
+///
 /// The widget to show the calendar with a header that displays the
 /// current month, drop down and then the events in a sliverlist.
 ///
 class CalendarWidget extends StatefulWidget {
-  final DateTime initialDate;
-  final CalendarViewType view;
-
-  final double initialScrollOffset;
-  final CalendarEventBuiler getEvents;
-  final CalendarWidgetBuilder buildItem;
-  final ImageProvider monthHeader;
-  final ImageProvider bannerHeader;
-  final Color headerColor;
-  final TextStyle headerMonthStyle;
-  final Widget header;
-
   ///
   /// Creates a calendar widget in place.  The [initialDate] is the date
   /// which will be used to show the first calendar in the list.  The
@@ -57,6 +51,7 @@ class CalendarWidget extends StatefulWidget {
     @required this.monthHeader,
     @required this.buildItem,
     @required this.getEvents,
+    @required this.monthHeaderBuilder,
     Key key,
     this.view = CalendarViewType.Schedule,
     String calendarKey,
@@ -67,14 +62,28 @@ class CalendarWidget extends StatefulWidget {
   })  : initialScrollOffset = initialScrollOffset ??
             new DateTime.now().microsecondsSinceEpoch.toDouble(),
         super(key: key);
+  final DateTime initialDate;
+  final CalendarViewType view;
+
+  final double initialScrollOffset;
+  final CalendarEventBuiler getEvents;
+  final CalendarWidgetBuilder buildItem;
+  final ImageProvider monthHeader;
+  final ImageProvider bannerHeader;
+  final Color headerColor;
+  final TextStyle headerMonthStyle;
+  final Widget header;
+  final MonthHeaderBuilder monthHeaderBuilder;
 
   @override
   State createState() {
-    return CalendarWidgetState();
+    return CalendarWidgetState(monthHeaderBuilder);
   }
 }
 
 class CalendarWidgetState extends State<CalendarWidget> {
+  CalendarWidgetState(this.monthHeaderBuilder);
+
   int _currentTopDisplayIndex;
   Map<int, List<CalendarEvent>> events = <int, List<CalendarEvent>>{};
   StreamController<int> _updateController = new StreamController<int>();
@@ -85,6 +94,7 @@ class CalendarWidgetState extends State<CalendarWidget> {
   ScrollController controller;
   bool _headerExpanded = false;
   SliverScrollViewCalendarElement element;
+  MonthHeaderBuilder monthHeaderBuilder;
 
   @override
   void initState() {

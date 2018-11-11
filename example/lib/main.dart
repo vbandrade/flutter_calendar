@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:date_interval_navigator/date_interval_navigator.dart';
-
 import 'dart:math';
+import 'package:date_interval_navigator/date_interval_navigator.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MyApp());
@@ -52,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<CalendarEvent> getEvents(DateTime start, DateTime end) {
     final int diff = end.difference(start).inDays;
 
-    var events = List<CalendarEvent>();
+    List<CalendarEvent> events = <CalendarEvent>[];
 
     for (int i = 0; i < diff; i++) {
       DateTime date = start.add(Duration(days: i));
@@ -76,8 +75,31 @@ class _MyHomePageState extends State<MyHomePage> {
         initialDate: DateTime.now(),
         buildItem: buildItem,
         getEvents: getEvents,
+        monthHeaderBuilder: monthHeaderBuilder,
         bannerHeader: AssetImage("assets/images/calendarheader.png"),
         monthHeader: AssetImage("assets/images/calendarbanner.jpg"),
+      ),
+    );
+  }
+
+  Widget monthHeaderBuilder(BuildContext context, int year, int month) {
+    DateTime start = new DateTime(year, month, 1);
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        image: DecorationImage(
+          image: AssetImage("assets/images/calendarbanner.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      margin: EdgeInsets.only(top: 20.0),
+      constraints: BoxConstraints(minHeight: 100.0, maxHeight: 100.0),
+      child: Text(
+        MaterialLocalizations.of(context).formatMonthYear(start),
+        style: Theme.of(context).textTheme.title.copyWith(
+              color: Colors.white,
+              fontSize: 30.0,
+            ),
       ),
     );
   }

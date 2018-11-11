@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
-import 'sliverlistcalendar.dart';
-import 'calendardaymarker.dart';
-import 'dart:async';
-import 'calendarevent.dart';
 import 'calendar.dart';
+import 'calendardaymarker.dart';
+import 'calendarevent.dart';
+import 'sliverlistcalendar.dart';
 
 class SliverScrollViewCalendarElement extends StatelessElement
     implements CalendarEventElement {
@@ -397,26 +398,8 @@ class SliverScrollViewCalendarElement extends StatelessElement
       }
     } else {
       // Put in the month header if we are at the start of the month.
-      DateTime start = new DateTime(time.year, time.month, time.day);
-      if (start.day == 1) {
-        return new Container(
-          decoration: new BoxDecoration(
-            color: Colors.blue,
-            image: new DecorationImage(
-              image: calendarWidget.monthHeader,
-              fit: BoxFit.cover,
-            ),
-          ),
-          margin: new EdgeInsets.only(top: 20.0),
-          constraints: new BoxConstraints(minHeight: 100.0, maxHeight: 100.0),
-          child: new Text(
-            MaterialLocalizations.of(context).formatMonthYear(start),
-            style: Theme.of(context).textTheme.title.copyWith(
-                  color: Colors.white,
-                  fontSize: 30.0,
-                ),
-          ),
-        );
+      if (time.day == 1) {
+        return _state.monthHeaderBuilder(context, time.year, time.month);
       }
     }
     return const SizedBox(height: 0.1);
