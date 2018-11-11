@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildItem(BuildContext context, CalendarEvent e) {
     return Card(
       child: ListTile(
-        title: Text("Event ${e.index}"),
+        title: Text("Event ${e.instant}"),
         subtitle: Text("Yay for events"),
         leading: const Icon(Icons.gamepad),
       ),
@@ -50,13 +50,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<CalendarEvent> getEvents(DateTime start, DateTime end) {
-    DateTime nowTime = DateTime.now().subtract(Duration(days: 5));
-    for (int i = 0; i < 20; i++) {
-      DateTime start = nowTime.add(Duration(days: i + random.nextInt(10)));
+    final int diff = end.difference(start).inDays;
+
+    var events = List<CalendarEvent>();
+
+    for (int i = 0; i < diff; i++) {
+      DateTime date = start.add(Duration(days: i));
       events.add(CalendarEvent(
-          index: i,
-          instant: start,
-          instantEnd: start.add(Duration(minutes: 30))));
+        index: i,
+        instant: date,
+        instantEnd: date.add(Duration(hours: 3)),
+      ));
     }
 
     return events;
