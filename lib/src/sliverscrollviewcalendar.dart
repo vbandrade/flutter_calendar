@@ -50,8 +50,8 @@ class SliverScrollViewCalendarElement extends StatelessElement
     switch (_type) {
       case CalendarViewType.Schedule:
         // Grab 60 days ahead and 60 days behind.
-        _startWindow = normalizedStart.subtract(new Duration(days: 60));
-        _endWindow = normalizedStart.add(new Duration(days: 60));
+        _startWindow = normalizedStart.subtract(new Duration(days: 30));
+        _endWindow = normalizedStart.add(new Duration(days: 30));
         break;
       case CalendarViewType.Week:
         _startWindow = new DateTime(calendarWidget.initialDate.year,
@@ -83,15 +83,15 @@ class SliverScrollViewCalendarElement extends StatelessElement
 
       bool changed = false;
       DateTime top = new DateTime.fromMillisecondsSinceEpoch(ms);
-      if (_startWindow.difference(top).inDays < 30 ||
+      if (_startWindow.difference(top).inDays < 10 ||
           top.isBefore(_startWindow)) {
         // Set a new start window.
         debugPrint("Moving start window $newIndex $top $_startWindow");
-        _startWindow = top.subtract(new Duration(days: 60));
+        _startWindow = top.subtract(Duration(days: 30));
         changed = true;
       }
-      if (_endWindow.difference(top).inDays < 30 || top.isAfter(_endWindow)) {
-        _endWindow = top.add(new Duration(days: 60));
+      if (_endWindow.difference(top).inDays < 10 || top.isAfter(_endWindow)) {
+        _endWindow = top.add(Duration(days: 30));
         changed = true;
       }
       if (changed) {
