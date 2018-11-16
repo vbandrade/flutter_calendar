@@ -6,7 +6,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f5f9f93-c9d3-411e-a63c-622843f43b4d" name="Default" comment="" />
+    <list default="true" id="6f5f9f93-c9d3-411e-a63c-622843f43b4d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/calendarevent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/calendarevent.dart" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

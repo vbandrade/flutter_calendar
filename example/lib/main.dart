@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildItem(BuildContext context, CalendarEvent e) {
     return Card(
       child: ListTile(
-        title: Text("Event ${e.date}"),
+        title: Text("Event ${e.event}"),
         subtitle: Text("Yay for events"),
         leading: const Icon(Icons.gamepad),
       ),
@@ -55,9 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     for (int i = 0; i < diff; i++) {
       DateTime date = start.add(Duration(days: i));
-      events.add(CalendarEvent(
+      events.add(CalendarEvent<int>(
         index: i,
         date: date,
+        event: Random().nextInt(500),
       ));
     }
 

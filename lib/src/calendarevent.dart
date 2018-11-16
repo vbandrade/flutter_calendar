@@ -75,12 +75,14 @@ enum CalendarViewType { Schedule, Week, Month }
 /// The calendar event to display in the calendar.  This contains details
 /// about how to render it and display it.
 ///
-class CalendarEvent {
+class CalendarEvent<E> {
   CalendarEvent({
     @required this.index,
     @required this.date,
+    this.event,
   });
   DateTime date;
+  E event;
 
   int index;
 
