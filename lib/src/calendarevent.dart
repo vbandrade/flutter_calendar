@@ -79,13 +79,10 @@ class CalendarEvent {
   CalendarEvent({
     @required this.index,
     @required this.date,
-    @required DateTime instantEnd,
-  }) : _instantEnd = instantEnd;
+  });
   DateTime date;
-  DateTime _instantEnd;
-  int index;
 
-  DateTime get instantEnd => _instantEnd;
+  int index;
 
   static const int YEAR_OFFSET = 12 * 31;
   static const int MONTH_OFFSET = 31;

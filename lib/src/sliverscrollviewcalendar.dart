@@ -203,16 +203,14 @@ class SliverScrollViewCalendarElement extends StatelessElement
               nowTime.millisecondsSinceEpoch - Duration.millisecondsPerDay;
           bool shownDivider = false;
           for (CalendarEvent e in events) {
-            if (e.date.millisecondsSinceEpoch > lastMS &&
-                nowTime.isBefore(e.instantEnd)) {
+            if (e.date.millisecondsSinceEpoch > lastMS) {
               // Stick in the 'now marker' right here.
               displayEvents.add(new CalendarDayMarker(
                 color: Colors.redAccent,
               ));
               displayEvents.add(_state.widget.buildItem(context, e));
               shownDivider = true;
-            } else if (e.date.isAfter(nowTime) &&
-                e.instantEnd.isBefore(nowTime)) {
+            } else if (e.date.isAfter(nowTime)) {
               // Show on top of this card.
               displayEvents.add(new Stack(
                 children: <Widget>[

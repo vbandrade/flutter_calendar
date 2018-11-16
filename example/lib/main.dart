@@ -58,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
       events.add(CalendarEvent(
         index: i,
         date: date,
-        instantEnd: date.add(Duration(hours: 3)),
       ));
     }
 
