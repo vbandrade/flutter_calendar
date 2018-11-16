@@ -78,10 +78,10 @@ enum CalendarViewType { Schedule, Week, Month }
 class CalendarEvent {
   CalendarEvent({
     @required this.index,
-    @required this.instant,
+    @required this.date,
     @required DateTime instantEnd,
   }) : _instantEnd = instantEnd;
-  DateTime instant;
+  DateTime date;
   DateTime _instantEnd;
   int index;
 
@@ -99,6 +99,6 @@ class CalendarEvent {
 
   @override
   String toString() {
-    return 'CalendarEvent{instant: $instant, index: $index}';
+    return 'CalendarEvent{instant: $date, index: $index}';
   }
 }

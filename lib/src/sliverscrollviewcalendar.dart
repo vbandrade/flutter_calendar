@@ -189,7 +189,7 @@ class SliverScrollViewCalendarElement extends StatelessElement
       int index = CalendarEvent.indexFromMilliseconds(time);
       if (_state.events.containsKey(index)) {
         List<CalendarEvent> events = _state.events[index];
-        DateTime day = events[0].instant;
+        DateTime day = events[0].date;
         final Size screenSize = MediaQuery.of(context).size;
         double widthSecond = screenSize.width - widthFirst - inset;
         TextStyle style = Theme.of(context).textTheme.subhead.copyWith(
@@ -203,7 +203,7 @@ class SliverScrollViewCalendarElement extends StatelessElement
               nowTime.millisecondsSinceEpoch - Duration.millisecondsPerDay;
           bool shownDivider = false;
           for (CalendarEvent e in events) {
-            if (e.instant.millisecondsSinceEpoch > lastMS &&
+            if (e.date.millisecondsSinceEpoch > lastMS &&
                 nowTime.isBefore(e.instantEnd)) {
               // Stick in the 'now marker' right here.
               displayEvents.add(new CalendarDayMarker(
@@ -211,7 +211,7 @@ class SliverScrollViewCalendarElement extends StatelessElement
               ));
               displayEvents.add(_state.widget.buildItem(context, e));
               shownDivider = true;
-            } else if (e.instant.isAfter(nowTime) &&
+            } else if (e.date.isAfter(nowTime) &&
                 e.instantEnd.isBefore(nowTime)) {
               // Show on top of this card.
               displayEvents.add(new Stack(

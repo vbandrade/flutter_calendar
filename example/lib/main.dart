@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildItem(BuildContext context, CalendarEvent e) {
     return Card(
       child: ListTile(
-        title: Text("Event ${e.instant}"),
+        title: Text("Event ${e.date}"),
         subtitle: Text("Yay for events"),
         leading: const Icon(Icons.gamepad),
       ),
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       DateTime date = start.add(Duration(days: i));
       events.add(CalendarEvent(
         index: i,
-        instant: date,
+        date: date,
         instantEnd: date.add(Duration(hours: 3)),
       ));
     }

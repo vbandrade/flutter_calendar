@@ -161,15 +161,15 @@ class CalendarWidgetState extends State<CalendarWidget> {
   void updateInternalEvents(DateTime startWindow, DateTime endWindow) {
     List<CalendarEvent> rawEvents = widget.getEvents(startWindow, endWindow);
     rawEvents.sort(
-        (CalendarEvent e, CalendarEvent e2) => e.instant.compareTo(e2.instant));
+        (CalendarEvent e, CalendarEvent e2) => e.date.compareTo(e2.date));
     // Make sure we clean up the old indexes when we update.
     events.clear();
     if (rawEvents.length > 0) {
-      int curIndex = CalendarEvent.indexFromMilliseconds(rawEvents[0].instant);
+      int curIndex = CalendarEvent.indexFromMilliseconds(rawEvents[0].date);
       int sliceIndex = 0;
       // Get the offsets into the array.
       for (int i = 1; i < rawEvents.length; i++) {
-        int index = CalendarEvent.indexFromMilliseconds(rawEvents[i].instant);
+        int index = CalendarEvent.indexFromMilliseconds(rawEvents[i].date);
         if (index != curIndex) {
           if (sliceIndex != i) {
             events[curIndex] = rawEvents.sublist(sliceIndex, i);
