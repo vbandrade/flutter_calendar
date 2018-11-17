@@ -9,13 +9,18 @@ import 'sliverscrollviewcalendar.dart';
 
 export 'calendarevent.dart';
 
-typedef List<CalendarEvent> CalendarEventBuiler(DateTime start, DateTime end);
+typedef CalendarEventFetcher<E> = List<CalendarEvent<E>> Function(
+    DateTime start, DateTime end);
 
 ///
 /// The widget for the specific calendar event, this is what to render
 /// when showing the calendar event.
 ///
-typedef Widget CalendarWidgetBuilder(BuildContext context, CalendarEvent index);
+typedef CalendarWidgetBuilder = Widget Function(
+    BuildContext context, CalendarEvent<Object> index);
+
+// typedef Widget CalendarWidgetBuilder(
+//     BuildContext context, CalendarEvent<Object> index);
 
 ///
 /// The Wdiget for the month header
@@ -65,7 +70,7 @@ class CalendarWidget extends StatefulWidget {
   final CalendarViewType view;
 
   final double initialScrollOffset;
-  final CalendarEventBuiler getEvents;
+  final CalendarEventFetcher getEvents;
   final CalendarWidgetBuilder buildItem;
   final ImageProvider bannerHeader;
   final Color headerColor;
@@ -160,8 +165,8 @@ class CalendarWidgetState extends State<CalendarWidget> {
   ///
   void updateInternalEvents(DateTime startWindow, DateTime endWindow) {
     List<CalendarEvent> rawEvents = widget.getEvents(startWindow, endWindow);
-    rawEvents.sort(
-        (CalendarEvent e, CalendarEvent e2) => e.date.compareTo(e2.date));
+    rawEvents
+        .sort((CalendarEvent e, CalendarEvent e2) => e.date.compareTo(e2.date));
     // Make sure we clean up the old indexes when we update.
     events.clear();
     if (rawEvents.length > 0) {

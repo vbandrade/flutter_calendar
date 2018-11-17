@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<CalendarEvent> events = <CalendarEvent>[];
+  List<CalendarEvent<int>> events = <CalendarEvent<int>>[];
 
   Random random = new Random();
 
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  Widget buildItem(BuildContext context, CalendarEvent e) {
+  Widget buildItem<int>(BuildContext context, CalendarEvent<int> e) {
     return Card(
       child: ListTile(
         title: Text("Event ${e.event}"),
@@ -48,10 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<CalendarEvent> getEvents(DateTime start, DateTime end) {
+  List<CalendarEvent<int>> getEvents(DateTime start, DateTime end) {
     final int diff = end.difference(start).inDays;
 
-    List<CalendarEvent> events = <CalendarEvent>[];
+    List<CalendarEvent<int>> events = <CalendarEvent<int>>[];
 
     for (int i = 0; i < diff; i++) {
       DateTime date = start.add(Duration(days: i));
