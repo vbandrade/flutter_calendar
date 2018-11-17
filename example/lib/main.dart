@@ -60,6 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
         date: date,
         event: Random().nextInt(500),
       ));
+      events.add(CalendarEvent<int>(
+        index: i,
+        date: date,
+        event: Random().nextInt(500),
+      ));
     }
 
     return events;
