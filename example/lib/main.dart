@@ -56,12 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
     for (int i = 0; i < diff; i++) {
       DateTime date = start.add(Duration(days: i));
       events.add(CalendarEvent<int>(
-        index: i + 1000,
         date: date,
         event: Random().nextInt(500),
       ));
       events.add(CalendarEvent<int>(
-        index: i,
         date: date,
         event: 1,
       ));
